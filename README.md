@@ -94,3 +94,17 @@ It converts document text into **vector embeddings**, enabling semantic search a
 
 ```bash
 streamlit run app.py
+
+```
+
+---
+
+
+## 🖼️ Application Screenshot
+
+<img width="1856" height="883" alt="Screenshot 2026-01-14 220621" src="https://github.com/user-attachments/assets/067fa5fb-a2da-4f58-b9d8-01e372c33ee6" />
+
+---
+
+<img width="1829" height="907" alt="Screenshot 2026-01-14 220731" src="https://github.com/user-attachments/assets/6f3b1a06-115e-4574-91ec-3b3395718bc0" />
+
