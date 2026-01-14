@@ -24,7 +24,7 @@ HF_TOKEN = os.getenv("HF_TOKEN") or st.secrets.get("HF_TOKEN")
 # Streamlit config
 # --------------------------------------------------
 st.set_page_config(
-    page_title="AI Document Q&A (LLaMA 3.2)",
+    page_title="AI-Based Document Retrieval Bot",
     layout="wide"
 )
 
@@ -207,3 +207,4 @@ def main():
 # --------------------------------------------------
 if __name__ == "__main__":
     main()
+
