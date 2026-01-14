@@ -14,10 +14,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 
 # --------------------------------------------------
-# ENV
+# ENV (Local .env + Streamlit Secrets)
 # --------------------------------------------------
 load_dotenv()
-HF_TOKEN = os.getenv("HF_TOKEN")
+
+HF_TOKEN = os.getenv("HF_TOKEN") or st.secrets.get("HF_TOKEN")
 
 # --------------------------------------------------
 # Streamlit config
@@ -46,7 +47,6 @@ h1 {
     transition: all 0.25s ease-in-out;
 }
 
-/* Hover Effect */
 .stButton > button:hover {
     background-color: #1e40af;
     transform: translateY(-2px) scale(1.04);
@@ -75,7 +75,6 @@ h1 {
 
 </style>
 """, unsafe_allow_html=True)
-
 
 # --------------------------------------------------
 # Helper Functions
@@ -122,7 +121,6 @@ def get_chain(vectorstore):
     )
 
     llm = ChatHuggingFace(llm=endpoint)
-
     retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
 
     prompt = ChatPromptTemplate.from_messages([
@@ -148,11 +146,10 @@ def get_chain(vectorstore):
 # Main App
 # --------------------------------------------------
 def main():
-    st.title("📄 AI-based Document Retrieval Bot")
-
+    st.title("📄 AI-Based Document Retrieval Bot")
 
     if not HF_TOKEN:
-        st.error("❌ HF_TOKEN not found in .env file")
+        st.error("❌ HF_TOKEN not found. Add it to .env or Streamlit Secrets.")
         st.stop()
 
     if "vectorstore" not in st.session_state:
@@ -164,7 +161,6 @@ def main():
     # ---------------- Sidebar ----------------
     with st.sidebar:
         st.header("📤 Upload PDF")
-
         pdf = st.file_uploader("Upload PDF", type=["pdf"])
 
         if st.button("Process Document"):
@@ -199,13 +195,11 @@ def main():
             else:
                 with st.spinner("Thinking..."):
                     chain = get_chain(st.session_state.vectorstore)
-
                     response = chain.invoke(question)
 
-                    # 🔥 CLEAN OUTPUT (NO METADATA)
                     answer = response.content if hasattr(response, "content") else str(response)
-
                     st.markdown(answer)
+
                     st.session_state.messages.append(
                         {"role": "assistant", "content": answer}
                     )
