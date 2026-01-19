@@ -12,7 +12,6 @@ There is a need for an intelligent system that can:
 
 ---
 
-
 ## 💡 Solution Overview
 
 This project is an **AI-Based Document Retrieval and Question Answering System** that allows users to upload PDF documents and ask questions related to the document.  
