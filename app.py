@@ -31,6 +31,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 
+
 /* -------- Reduce Heading Size -------- */
 h1 {
     font-size: 1.7rem !important;
@@ -207,4 +208,5 @@ def main():
 # --------------------------------------------------
 if __name__ == "__main__":
     main()
+
 
